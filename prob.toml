@@ -1,0 +1,95 @@
+title = "B. Two Arrays And Swaps"
+content = '''
+You are given two arrays $$a$$ and $$b$$ both consisting of $$n$$ positive (greater than zero) integers. You are also given an integer $$k$$.
+
+In one move, you can choose two indices $$i$$ and $$j$$ ($$1 \le i, j \le n$$) and swap $$a_i$$ and $$b_j$$ (i.e. $$a_i$$ becomes $$b_j$$ and vice versa). Note that $$i$$ and $$j$$ can be equal or different (in particular, swap $$a_2$$ with $$b_2$$ or swap $$a_3$$ and $$b_9$$ both are acceptable moves).
+
+Your task is to find the **maximum**  possible sum you can obtain in the array $$a$$ if you can do no more than (i.e. at most) $$k$$ such moves (swaps).
+
+You have to answer $$t$$ independent test cases.
+
+The first line of the input contains one integer $$t$$ ($$1 \le t \le 200$$) — the number of test cases. Then $$t$$ test cases follow.
+
+The first line of the test case contains two integers $$n$$ and $$k$$ ($$1 \le n \le 30; 0 \le k \le n$$) — the number of elements in $$a$$ and $$b$$ and the maximum number of moves you can do. The second line of the test case contains $$n$$ integers $$a_1, a_2, \dots, a_n$$ ($$1 \le a_i \le 30$$), where $$a_i$$ is the $$i$$-th element of $$a$$. The third line of the test case contains $$n$$ integers $$b_1, b_2, \dots, b_n$$ ($$1 \le b_i \le 30$$), where $$b_i$$ is the $$i$$-th element of $$b$$.
+
+For each test case, print the answer — the **maximum**  possible sum you can obtain in the array $$a$$ if you can do no more than (i.e. at most) $$k$$ swaps.
+
+In the first test case of the example, you can swap $$a_1 = 1$$ and $$b_2 = 4$$, so $$a=[4, 2]$$ and $$b=[3, 1]$$.
+
+In the second test case of the example, you don't need to swap anything.
+
+In the third test case of the example, you can swap $$a_1 = 1$$ and $$b_1 = 10$$, $$a_3 = 3$$ and $$b_3 = 10$$ and $$a_2 = 2$$ and $$b_4 = 10$$, so $$a=[10, 10, 10, 4, 5]$$ and $$b=[1, 9, 3, 2, 9]$$.
+
+In the fourth test case of the example, you cannot swap anything.
+
+In the fifth test case of the example, you can swap arrays $$a$$ and $$b$$, so $$a=[4, 4, 5, 4]$$ and $$b=[1, 2, 2, 1]$$.
+
+'''
+input_specification = '''
+**Input** **The first line of the input contains one integer $$t$$ ($$1 \le t \le 200$$) — the number of test cases. Then $$t$$ test cases follow.** **The first line of the test case contains two integers $$n$$ and $$k$$ ($$1 \le n \le 30; 0 \le k \le n$$) — the number of elements in $$a$$ and $$b$$ and the maximum number of moves you can do. The second line of the test case contains $$n$$ integers $$a_1, a_2, \dots, a_n$$ ($$1 \le a_i \le 30$$), where $$a_i$$ is the $$i$$-th element of $$a$$. The third line of the test case contains $$n$$ integers $$b_1, b_2, \dots, b_n$$ ($$1 \le b_i \le 30$$), where $$b_i$$ is the $$i$$-th element of $$b$$.** 
+
+'''
+output_specification = """
+**Output** **For each test case, print the answer — the <span class=\"tex-font-style-bf\">maximum</span> possible sum you can obtain in the array $$a$$ if you can do no more than (i.e. at most) $$k$$ swaps.** 
+
+"""
+note = """
+**Note** **In the first test case of the example, you can swap $$a_1 = 1$$ and $$b_2 = 4$$, so $$a=[4, 2]$$ and $$b=[3, 1]$$.** **In the second test case of the example, you don't need to swap anything.** **In the third test case of the example, you can swap $$a_1 = 1$$ and $$b_1 = 10$$, $$a_3 = 3$$ and $$b_3 = 10$$ and $$a_2 = 2$$ and $$b_4 = 10$$, so $$a=[10, 10, 10, 4, 5]$$ and $$b=[1, 9, 3, 2, 9]$$.** **In the fourth test case of the example, you cannot swap anything.** **In the fifth test case of the example, you can swap arrays $$a$$ and $$b$$, so $$a=[4, 4, 5, 4]$$ and $$b=[1, 2, 2, 1]$$.** 
+
+"""
+time_limit = 1
+memory_limit = 256
+tags = ["greedy", "sortings", "*800"]
+
+[[sample_data]]
+title = "Input"
+input = """
+5
+2 1
+1 2
+3 4
+5 5
+5 5 6 6 5
+1 2 5 4 3
+5 3
+1 2 3 4 5
+10 9 10 10 9
+4 0
+2 2 4 3
+2 4 2 3
+4 4
+1 2 2 1
+4 4 5 4
+"""
+output = """
+6
+27
+39
+11
+17
+"""
+
+[[data]]
+title = "Test: 1"
+input = '"6\r\n27\r\n39\r\n11\r\n17\r\n"'
+output = '"5\r\n2 1\r\n1 2\r\n3 4\r\n5 5\r\n5 5 6 6 5\r\n1 2 5 4 3\r\n5 3\r\n1 2 3 4 5\r\n10 9 10 10 9\r\n4 0\r\n2 2 4 3\r\n2 4 2 3\r\n4 4\r\n1 2 2 1\r\n4 4 5 4\r\n"'
+
+[[data]]
+title = "Test: 2"
+input = '"2\r\n2\r\n1\r\n2\r\n7\r\n7\r\n7\r\n6\r\n7\r\n7\r\n5\r\n7\r\n7\r\n5\r\n7\r\n7\r\n4\r\n7\r\n7\r\n3\r\n6\r\n7\r\n15\r\n15\r\n15\r\n15\r\n14\r\n15\r\n15\r\n15\r\n13\r\n15\r\n15\r\n15\r\n12\r\n15\r\n15\r\n15\r\n13\r\n15\r\n15\r\n15\r\n12\r\n15\r\n15\r\n15\r\n11\r\n15\r\n15\r\n15\r\n11\r\n14\r\n15\r\n15\r\n10\r\n14\r\n15\r\n15\r\n9\r\n13\r\n15\r\n15\r\n12\r\n15\r\n15\r\n15\r\n11\r\n15\r\n15\r\n15\r\n10\r\n15\r\n15\r\n15\r\n10\r\n14\r\n15\r\n15\r\n9\r\n14\r\n15\r\n15\r\n8\r\n13\r\n15\r\n15\r\n9\r\n13\r\n15\r\n15\r\n8\r\n13\r\n15\r\n15\r\n7\r\n12\r\n15\r\n15\r\n6\r\n11\r\n14\r\n15\r\n26\r\n26\r\n26\r\n26\r\n26\r\n25\r\n26\r\n26\r\n26\r\n26\r\n24\r\n26\r\n26\r\n26\r\n26\r\n23\r\n26\r\n26\r\n26\r\n26\r\n22\r\n26\r\n26\r\n26\r\n26\r\n24\r\n26\r\n26\r\n26\r\n26\r\n23\r\n26\r\n26\r\n..."'
+output = '"200\r\n1 0\r\n2\r\n1\r\n1 1\r\n2\r\n1\r\n1 0\r\n1\r\n2\r\n1 1\r\n1\r\n2\r\n2 0\r\n4 3\r\n1 2\r\n2 1\r\n4 3\r\n1 2\r\n2 2\r\n4 3\r\n1 2\r\n2 0\r\n4 2\r\n1 3\r\n2 1\r\n4 2\r\n1 3\r\n2 2\r\n4 2\r\n1 3\r\n2 0\r\n3 2\r\n1 4\r\n2 1\r\n3 2\r\n1 4\r\n2 2\r\n3 2\r\n1 4\r\n2 0\r\n1 4\r\n3 2\r\n2 1\r\n1 4\r\n3 2\r\n2 2\r\n1 4\r\n3 2\r\n2 0\r\n1 3\r\n2 4\r\n2 1\r\n1 3\r\n2 4\r\n2 2\r\n1 3\r\n2 4\r\n2 0\r\n2 1\r\n3 4\r\n2 1\r\n2 1\r\n3 4\r\n2 2\r\n2 1\r\n3 4\r\n3 0\r\n4 5 6\r\n3 2 1\r\n3 1\r\n4 5 6\r\n3 2 1\r\n3 2\r\n4 5 6\r\n3 2 1\r\n3 3\r\n4 5 6\r\n3 2 1\r\n3 0\r\n5 3 6\r\n4 2 1\r\n3 1\r\n5 3 6\r\n4 2 1\r\n3 2\r\n5 3 6\r\n4 2 1\r\n3 3\r\n5 3 6\r\n4 2 1\r\n3 0\r\n3 4 6\r\n2 1 5\r\n3 1\r\n3 4 6\r\n2 1 5\r\n3 ..."'
+
+[[data]]
+title = "Test: 3"
+input = '"4\r\n49\r\n528\r\n596\r\n218\r\n39\r\n143\r\n127\r\n143\r\n439\r\n19\r\n19\r\n14\r\n502\r\n211\r\n354\r\n13\r\n136\r\n705\r\n30\r\n356\r\n510\r\n420\r\n77\r\n423\r\n157\r\n98\r\n49\r\n29\r\n235\r\n223\r\n289\r\n64\r\n236\r\n453\r\n2\r\n558\r\n388\r\n22\r\n3\r\n30\r\n252\r\n8\r\n160\r\n13\r\n308\r\n38\r\n341\r\n447\r\n376\r\n65\r\n41\r\n216\r\n418\r\n522\r\n107\r\n363\r\n198\r\n13\r\n25\r\n4\r\n592\r\n24\r\n197\r\n285\r\n16\r\n6\r\n55\r\n1\r\n219\r\n511\r\n478\r\n156\r\n449\r\n608\r\n172\r\n573\r\n257\r\n153\r\n413\r\n602\r\n404\r\n522\r\n23\r\n6\r\n211\r\n84\r\n595\r\n42\r\n9\r\n4\r\n699\r\n150\r\n365\r\n122\r\n28\r\n2\r\n41\r\n554\r\n249\r\n301\r\n7\r\n147\r\n620\r\n4\r\n21\r\n1\r\n123\r\n252\r\n15\r\n281\r\n4\r\n292\r\n334\r\n6..."'
+output = '"200\r\n2 1\r\n1 2\r\n2 1\r\n8 7\r\n7 7 6 5 5 2 2 1\r\n7 5 5 2 7 2 1 1\r\n26 21\r\n8 7 13 19 23 16 15 9 11 18 10 12 1 20 5 6 4 24 25 22 21 14 21 26 2 17\r\n18 21 21 16 18 18 21 16 18 16 18 16 16 18 18 21 16 16 21 21 18 6 18 21 16 6\r\n30 6\r\n8 14 12 17 2 20 27 10 24 18 15 9 30 26 6 4 25 1 29 24 21 16 23 19 11 22 18 3 18 13\r\n15 1 15 17 15 19 17 7 7 15 17 17 23 23 19 7 15 7 19 17 20 17 20 7 20 23 1 7 23 23\r\n20 1\r\n13 4 6 6 7 17 18 4 20 6 16 1 6 6 7 4 13 20 9 16\r\n6 6 6 6 6 6 6 7 7 7 7 7 7 7 7 20 20 20 20 20\r\n7 7\r\n1 2 4 4 5 6 6\r\n2 3..."'
+
+[[data]]
+title = "Test: 4"
+input = '"81\r\n"'
+output = '"1\r\n6 1\r\n1 4 2 23 15 13\r\n5 6 4 1 15 24\r\n"'
+
+[metadata]
+id = 1353
+name = "Codeforces Round #642 (Div. 3)"
+index = "B"
